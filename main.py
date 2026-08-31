@@ -79,18 +79,18 @@ df.to_csv("california_housing.csv")
 # plt.tight_layout()
 # plt.show()
 
-plt.figure(figsize=(10, 8))
-
-corr = df.corr(numeric_only=True)
-
-sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm")
-
-plt.title("칼럼별 상관관계")
-plt.tight_layout()
-plt.show()
+# plt.figure(figsize=(10, 8))
+#
+# corr = df.corr(numeric_only=True)
+#
+# sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm")
+#
+# plt.title("칼럼별 상관관계")
+# plt.tight_layout()
+# plt.show()
 
 # 데이터 학습 준비
-features = ["MedInc", "AveRooms", "Latitude", "Longitude"]
+features = ["MedInc", "AveRooms", "Latitude", "Longitude", "HouseAge"]
 
 X = df[features]
 y = df["MedHouseVal"]
