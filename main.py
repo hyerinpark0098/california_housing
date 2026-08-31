@@ -22,8 +22,8 @@ df.to_csv("california_housing.csv")
 # print("df.describe() : \n",df.describe())
 
 # 결측치 확인
-print("columns별 결측치 갯수 확인 \n")
-print(df.isna().sum())
+# print("columns별 결측치 갯수 확인 \n")
+# print(df.isna().sum())
 
 # 데이터 탐색
 # 단변량
@@ -94,3 +94,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
+
+# 모델 학습 예측
+m = LinearRegression()
+m.fit(X_train, y_train)
+
+y_pred = m.predict(X_test)
+print(y_pred)
