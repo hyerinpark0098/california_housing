@@ -13,3 +13,9 @@ plt.rcParams["axes.unicode_minus"] = False
 # 데이터 저장
 df = fetch_california_housing(as_frame=True).frame
 df.to_csv("california_housing.csv")
+
+# 데이터 정보 확인
+print("df.head() : \n", df.head())
+print("df.shape : \n",df.shape)
+print("df.info() : \n",df.info())
+print("df.describe() : \n",df.describe())
