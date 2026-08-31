@@ -20,6 +20,31 @@ df.to_csv("california_housing.csv")
 # print("df.info() : \n",df.info())
 # print("df.describe() : \n",df.describe())
 
-# 결측치
+# 결측치 확인
 print("columns별 결측치 갯수 확인 \n")
 print(df.isna().sum())
+
+# 데이터 탐색
+# 단변량
+fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(15, 12))
+sns.histplot(df["MedInc"], bins=20, ax=axes[0,0])
+axes[0,0].set_title("해당 지역의 중위소득")
+sns.histplot(df["HouseAge"], bins=20, ax=axes[0,1])
+axes[0,1].set_title("해당 지역 주택의 연식")
+sns.histplot(df["AveRooms"], bins=20, ax=axes[0,2])
+axes[0,2].set_title("가구당 평균 방 갯수")
+sns.histplot(df["AveBedrms"], bins=20, ax=axes[1,0])
+axes[1,0].set_title("가구당 평균 침실 갯수")
+sns.histplot(df["Population"], bins=20, ax=axes[1,1])
+axes[1,1].set_title("해당 지역의 인구수")
+sns.histplot(df["AveOccup"], bins=20, ax=axes[1,2])
+axes[1,2].set_title("가구당 평균 거주인원")
+sns.histplot(df["Latitude"], bins=20, ax=axes[2,0])
+axes[2,0].set_title("위도")
+sns.histplot(df["Longitude"], bins=20, ax=axes[2,1])
+axes[2,1].set_title("경도")
+sns.histplot(df["MedHouseVal"], bins=20, ax=axes[2,2])
+axes[2,2].set_title("주택 가격의 중앙값")
+
+plt.tight_layout()
+plt.show()
