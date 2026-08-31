@@ -101,3 +101,14 @@ m.fit(X_train, y_train)
 
 y_pred = m.predict(X_test)
 print(y_pred)
+
+# 평가
+#r2
+r2 = r2_score(y_test, y_pred)
+print("r2:", r2)
+
+mae = mean_absolute_error(y_test, y_pred)
+print("mae:", mae)
+
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print("rmse:", rmse)
