@@ -15,7 +15,11 @@ df = fetch_california_housing(as_frame=True).frame
 df.to_csv("california_housing.csv")
 
 # 데이터 정보 확인
-print("df.head() : \n", df.head())
-print("df.shape : \n",df.shape)
-print("df.info() : \n",df.info())
-print("df.describe() : \n",df.describe())
+# print("df.head() : \n", df.head())
+# print("df.shape : \n",df.shape)
+# print("df.info() : \n",df.info())
+# print("df.describe() : \n",df.describe())
+
+# 결측치
+print("columns별 결측치 갯수 확인 \n")
+print(df.isna().sum())
