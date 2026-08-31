@@ -6,6 +6,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import (fetch_california_housing,)
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 plt.rcParams["font.family"] = "Malgun Gothic"
 plt.rcParams["axes.unicode_minus"] = False
@@ -47,33 +48,49 @@ print(df.isna().sum())
 # axes[2,2].set_title("주택 가격의 중앙값")
 
 # 이변량
-fig, axes = plt.subplots(2,4, figsize=(15,12))
-sns.scatterplot(data=df, x="MedInc", y="MedHouseVal", ax=axes[0,0])
-axes[0,0].set_title("중위소득과 주택가격의 상관관계")
+# fig, axes = plt.subplots(2,4, figsize=(15,12))
+# sns.scatterplot(data=df, x="MedInc", y="MedHouseVal", ax=axes[0,0])
+# axes[0,0].set_title("중위소득과 주택가격의 상관관계")
+#
+# sns.scatterplot(data=df, x="HouseAge", y="MedHouseVal", ax=axes[0,1])
+# axes[0,1].set_title("주택연식과 주택가격의 상관관계")
+#
+# sns.scatterplot(data=df, x="AveRooms", y="MedHouseVal", ax=axes[0,2])
+# axes[0,2].set_title("방 갯수와 주택가격의 상관관계")
+# axes[0,2].set_xlim(0,5)
+#
+# sns.scatterplot(data=df, x="AveBedrms", y="MedHouseVal", ax=axes[0,3])
+# axes[0,3].set_title("침실 갯수와 주택가격의 상관관계")
+# axes[0,3].set_xlim(0,5)
+#
+# sns.scatterplot(data=df, x="Population", y="MedHouseVal", ax=axes[1,0])
+# axes[1,0].set_title("인구수와 주택가격의 상관관계")
+#
+# sns.scatterplot(data=df, x="AveOccup", y="MedHouseVal", ax=axes[1,1])
+# axes[1,1].set_title("가구당 평균 거주인원과 주택가격의 상관관계")
+# axes[1,1].set_xlim(0,5)
+#
+# sns.scatterplot(data=df, x="Latitude", y="MedHouseVal", ax=axes[1,2])
+# axes[1,2].set_title("위도와 주택가격의 상관관계")
+#
+# sns.scatterplot(data=df, x="Longitude", y="MedHouseVal", ax=axes[1,3])
+# axes[1,3].set_title("경도와 주택가격의 상관관계")
+#
+# plt.tight_layout()
+# plt.show()
 
-sns.scatterplot(data=df, x="HouseAge", y="MedHouseVal", ax=axes[0,1])
-axes[0,1].set_title("주택연식과 주택가격의 상관관계")
+# 데이터 학습 준비
+features = ["MedInc", "AveRooms", "Latitude", "Longitude"]
 
-sns.scatterplot(data=df, x="AveRooms", y="MedHouseVal", ax=axes[0,2])
-axes[0,2].set_title("방 갯수와 주택가격의 상관관계")
-axes[0,2].set_xlim(0,5)
+X = df[features]
+y = df["MedHouseVal"]
 
-sns.scatterplot(data=df, x="AveBedrms", y="MedHouseVal", ax=axes[0,3])
-axes[0,3].set_title("침실 갯수와 주택가격의 상관관계")
-axes[0,3].set_xlim(0,5)
 
-sns.scatterplot(data=df, x="Population", y="MedHouseVal", ax=axes[1,0])
-axes[1,0].set_title("인구수와 주택가격의 상관관계")
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42)
 
-sns.scatterplot(data=df, x="AveOccup", y="MedHouseVal", ax=axes[1,1])
-axes[1,1].set_title("가구당 평균 거주인원과 주택가격의 상관관계")
-axes[1,1].set_xlim(0,5)
-
-sns.scatterplot(data=df, x="Latitude", y="MedHouseVal", ax=axes[1,2])
-axes[1,2].set_title("위도와 주택가격의 상관관계")
-
-sns.scatterplot(data=df, x="Longitude", y="MedHouseVal", ax=axes[1,3])
-axes[1,3].set_title("경도와 주택가격의 상관관계")
-
-plt.tight_layout()
-plt.show()
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
